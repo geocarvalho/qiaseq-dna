@@ -92,4 +92,86 @@ Please address questions to raghavendra.padmanabhan@qiagen.com, with CC to john.
 
 ```
 python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sample_L001_R1_001.fastq.gz /path/to/sample_L001_R2_001.fastq.gz /path/to/output/dir/ /path/to/Panel.primer3.txt /path/to/Panel.roi.bed
-``` 
+```
+
+## Requirements:
+
+```
+% cd /home/genomika/qiaseq-dna
+% source activate qiaseq
+% conda install -c bioconda bedtools=2.25.0 htslib=1.3.1 cutadapt=1.10 picard=1.97 snpeff=4.2 bwa=0.7.15
+% wget https://storage.googleapis.com/qiaseq-dna/lib/ssw.tar.gz https://storage.googleapis.com/qiaseq-dna/lib/fgbio-0.1.4-SNAPSHOT.jar -P ./bin
+% conda install -c bioconda scipy MySQL-python openpyxl pysam=0.9.0
+% pip install statistics
+% wget https://storage.googleapis.com/qiaseq-dna/lib/py-editdist-0.3.tar.gz https://storage.googleapis.com/qiaseq-dna/lib/sendgrid-v2.2.1.tar.gz -P ./downloads/
+% cd ./downloads/ && \
+    tar -xvf py-editdist-0.3.tar.gz && \
+    cd py-editdist-0.3 && \
+    python setup.py install && \
+    cd .. && \
+    tar -xvf sendgrid-v2.2.1.tar.gz && \
+    cd sendgrid-python-2.2.1 && \
+    python setup.py install
+% echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
+% Rscript -e "install.packages('plyr')"
+% conda install -c cyclus java-jdk=8.45.14
+% wget https://github.com/samtools/samtools/releases/download/1.5/samtools-1.5.tar.bz2 -O ./bin/downloads/samtools-1.5.tar.bz2
+% cd ./bin/downloads/ && \
+    tar -xvf samtools-1.5.tar.bz2 && \
+    cd samtools-1.5  && \
+    mkdir -p ../samtools-1.5 && \
+    ./configure --prefix ../samtools-1.5 && \
+    make && \
+    make install
+% wget https://storage.googleapis.com/qiaseq-dna/data/genome/ucsc.hg19.dict https://storage.googleapis.com/qiaseq-dna/data/genome/ucsc.hg19.fa.gz -P ./data/genome/
+% cd ./data/genome && \
+    gunzip ucsc.hg19.fa.gz  && \
+    ## Index the fasta using samtools
+    ./bin/samtools-1.5/bin/samtools faidx /srv/qgen/data/genome/ucsc.hg19.fa && \ 
+    ## Run bwa to generate index files 
+    bwa index /srv/qgen/data/genome/ucsc.hg19.fa
+% wget https://storage.googleapis.com/qiaseq-dna/data/annotation/clinvar_20160531.vcf.gz \
+         https://storage.googleapis.com/qiaseq-dna/data/annotation/clinvar_20160531.vcf.gz.tbi \
+         https://storage.googleapis.com/qiaseq-dna/data/annotation/common_all_20160601.vcf.gz \
+    	 https://storage.googleapis.com/qiaseq-dna/data/annotation/common_all_20160601.vcf.gz.tbi \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/CosmicAllMuts_v69_20140602.vcf.gz \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/CosmicAllMuts_v69_20140602.vcf.gz.tbi \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/simpleRepeat_TRF.bed \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/SR_LC_SL_RepeatMasker.bed \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/bkg.error.v2.RData \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/SR_LC_SL.full.bed \
+	 https://storage.googleapis.com/qiaseq-dna/data/annotation/simpleRepeat.full.bed \
+	  -P ./annotation/
+% wget http://downloads.sourceforge.net/project/snpeff/databases/v4_2/snpEff_v4_2_GRCh37.75.zip -P /opt/conda/share/snpeff-4.2-0/
+% cd /usr/local/anaconda/envs/qiaseq/share/snpeff-4.2-0/ && \
+    unzip snpEff_v4_2_GRCh37.75.zip
+% cpan DateTime \
+	cpan DBI \
+	cpan DBD::SQLite \
+	cpan Env::Path \
+	cpan File::chdir \
+	cpan Getopt::Long::Descriptive \
+	cpan Sort:Naturally \
+	cpan Config::IniFiles \
+	cpan Data::Dump::Color \
+	cpan Data::Table::Excel \
+	cpan Hash::Merge \
+	cpan File::Slurp
+% Rscript -e "install.packages('MASS')" 
+% Rscript -e "install.packages('ggplot2')" 
+% Rscript -e "install.packages('gridExtra')" 
+% Rscript -e "install.packages('naturalsort')" 
+% Rscript -e "install.packages('scales')" 
+% Rscript -e "install.packages('ggplot2')" 
+% Rscript -e "install.packages('extrafont')"
+% mkdir TorrentSuite && cd TorrentSuite
+% wget https://storage.googleapis.com/qiaseq-dna/lib/TorrentSuite/tmap      https://storage.googleapis.com/qiaseq-dna/lib/TorrentSuite/tvc
+% chmod 775 tmap tvc
+% mkdir example && cd example
+% wget https://storage.googleapis.com/qiaseq-dna/example/NEB_S2_L001_R1_001.fastq.gz      https://storage.googleapis.com/qiaseq-dna/example/NEB_S2_L001_R2_001.fastq.gz  https://storage.googleapis.com/qiaseq-dna/example/DHS-101Z.primers.txt   https://storage.googleapis.com/qiaseq-dna/example/DHS-101Z.roi.bed
+% mkdir test_smcounter-v2 && cd test_smcounter-v2
+% wget https://storage.googleapis.com/qiaseq-dna/test_files/high.confidence.variants.bed          https://storage.googleapis.com/qiaseq-dna/test_files/NB956-240-3-10_S1.highconfidence.bam  https://storage.googleapis.com/qiaseq-dna/test_files/NB956-240-3-10_S1.highconfidence.VariantList.long.txt  https://storage.googleapis.com/qiaseq-dna/test_files/NB956-240-3-10_S1.highconfidence.bam.bai
+% conda install -c bioconda vcflib
+% git clone https://github.com/reineckef/quandico.git && cd quandico
+	bash install.sh
+```
