@@ -87,7 +87,7 @@ The dependencies are fully documented in the Dockerfile in this repository.
 Please address questions to raghavendra.padmanabhan@qiagen.com, with CC to john.dicarlo@qiagen.com.
 
 ---
-# George annotations :panda:
+# George annotations :panda_face:
 
 ## Requirements:
 
