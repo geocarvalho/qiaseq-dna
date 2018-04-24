@@ -87,17 +87,27 @@ The dependencies are fully documented in the Dockerfile in this repository.
 Please address questions to raghavendra.padmanabhan@qiagen.com, with CC to john.dicarlo@qiagen.com.
 
 ---
-
-## To run it using the George Carvalho changes:
-
-```
-python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sample_L001_R1_001.fastq.gz /path/to/sample_L001_R2_001.fastq.gz /path/to/output/dir/ /path/to/Panel.primer3.txt /path/to/Panel.roi.bed
-```
+# George annotations ::panda::
 
 ## Requirements:
 
+1. Clone the repository
+
 ```
-% cd /home/genomika/qiaseq-dna
+% cd /path/to/dir
+% git clone https://github.com/geocarvalho/qiaseq-dna.git
+```
+
+2. Inside the repository use `conda` to create a environment and activate it
+
+```
+% conda create -n qiaseq
+% source activate  qiaseq
+```
+
+3. Install all the other stuffs:
+
+```
 % source activate qiaseq
 % conda install -c bioconda bedtools=2.25.0 htslib=1.3.1 cutadapt=1.10 picard=1.97 snpeff=4.2 bwa=0.7.15
 % wget https://storage.googleapis.com/qiaseq-dna/lib/ssw.tar.gz https://storage.googleapis.com/qiaseq-dna/lib/fgbio-0.1.4-SNAPSHOT.jar -P ./bin
@@ -174,4 +184,10 @@ python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sa
 % conda install -c bioconda vcflib
 % git clone https://github.com/reineckef/quandico.git && cd quandico
 	bash install.sh
+```
+
+## To run it using the George Carvalho changes:
+
+```
+python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sample_L001_R1_001.fastq.gz /path/to/sample_L001_R2_001.fastq.gz /path/to/output/dir/ /path/to/Panel.primer3.txt /path/to/Panel.roi.bed
 ```
