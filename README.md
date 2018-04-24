@@ -189,5 +189,5 @@ Please address questions to raghavendra.padmanabhan@qiagen.com, with CC to john.
 ## To run it using the George Carvalho changes:
 
 ```
-python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sample_L001_R1_001.fastq.gz /path/to/sample_L001_R2_001.fastq.gz /path/to/output/dir/ /path/to/Panel.primer3.txt /path/to/Panel.roi.bed
+% python run_qiaseq_dna_gnmk.py run_sm_counter_v1.params.txt v1 single /path/to/Sample_L001_R1_001.fastq.gz /path/to/sample_L001_R2_001.fastq.gz /path/to/output/dir/ /path/to/Panel.primer3.txt /path/to/Panel.roi.bed
 ```
