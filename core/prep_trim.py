@@ -25,22 +25,22 @@ def runShellCommand(cmd):
 def run(cutadaptDir,umiTagName,filePrefix):
 
    # split read set name from input file directory (NOTE: ".R1.fastq" and ".R2.fastq" are required file suffixes here!)
-   dirIn, filePrefix = os.path.split(filePrefix)
-   if len(dirIn) > 0:
-      dirIn = dirIn + "/"
+#    dirIn, filePrefix = os.path.split(filePrefix)
+#    if len(dirIn) > 0:
+#       dirIn = dirIn + "/"
    
    # trim R1 reads 3' end (gets R2 12 bp barcode, 11-mer common, and ILMN adapter not cut by ILMN software) (primer side)
    cmd  = cutadaptDir + "cutadapt -e 0.18 -O 3 " \
         + "-a AGGACTCCAAT -n 1 " \
         + "-o " + filePrefix + ".temp0.R1.fastq " \
-        + dirIn + filePrefix +       ".R1.fastq "
+        + filePrefix +       ".R1.fastq "
    runShellCommand(cmd)
    
    # trim R2 reads 3' end (gets R1 custom sequencing adapter region not cut by ILMN software - customer sequencing primer settings usually wrong) (barcode side)
    cmd  = cutadaptDir + "cutadapt -e 0.18 -O 3 " \
         + "-a CAAAACGCAATACTGTACATT -n 1 " \
         + "-o " + filePrefix + ".temp0.R2.fastq " \
-        + dirIn + filePrefix +       ".R2.fastq "
+        + filePrefix +       ".R2.fastq "
    runShellCommand(cmd)
       
    # open output

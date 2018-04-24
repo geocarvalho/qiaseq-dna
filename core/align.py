@@ -18,7 +18,7 @@ def run(cfg, readFile1, readFile2, bamFileOut):
    numCores         = cfg.numCores
    
    # make file names for local BWA and samtools log files
-   logFileBase     = os.path.basename(bamFileOut)
+   logFileBase     = bamFileOut
    logFileBwa      = logFileBase.replace(".bam",".bwa.log")
    logFileSamtools = logFileBase.replace(".bam",".samtools.log")
 
