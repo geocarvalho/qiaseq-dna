@@ -140,12 +140,8 @@ def run(cfg):
    # set up trimming work to be run in parallel sub-processes, using another python script
    workIn = []
    for batchNum in range(numBatches):
-      print("e aqui?----------")
       filePrefixBatch = "{}.{:04d}".format(filePrefixOut,batchNum)
-      print("------")
       cmd = "python {0} {1} {2} {3} > {3}.log 2>&1 ".format(trimScript,cutadaptDir,tagNameUmiSeq,filePrefixBatch)
-      print(cmd)
-      print('----')
       workIn.append(cmd)
       
    # run cutadapt and UMI extraction in parallel sub-processes
